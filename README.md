@@ -2,13 +2,8 @@
 
 Given set of N circles at predefined positions attempts to remove overlap between circles
 
-# install
+Experimental. Just trying overlap removal works
 
-With [npm](https://npmjs.org) do:
-
-```
-npm install remove-overlaps
-```
 
 # license
 
