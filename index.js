@@ -22,9 +22,25 @@ function removeOverlaps(positions) {
       // item to see if it overlaps with current node.
       nodePoints.forEach(moveIfNeeded);
     } else {
-      // Continue subdivision only if target circle is within current node
-      return bounds.contains(currentNode.x, currentNode.y);
+      // Continue subdivision only if current circle intersects our bounds
+      // Find the closest point to the circle within the rectangle
+      var closestX = clamp(currentNode.x, bounds.left(), bounds.x + bounds.half);
+      var closestY = clamp(currentNode.y, bounds.top(), bounds.y + bounds.half);
+
+      // Calculate the distance between the circle's center and this closest point
+      var distanceX = currentNode.x - closestX;
+      var distanceY = currentNode.y - closestY;
+
+      // If the distance is less than the circle's radius, an intersection occurs
+      var distanceSquared = (distanceX * distanceX) + (distanceY * distanceY);
+      return distanceSquared < (currentNode.r * currentNode.r);
     }
+  }
+
+  function clamp(v, min, max) {
+    if (v < min) return min;
+    if (v > max) return max;
+    return v;
   }
 
   function moveIfNeeded(nodeIndex) {
