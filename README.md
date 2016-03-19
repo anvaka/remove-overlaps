@@ -2,8 +2,6 @@
 
 Given set of N circles at predefined positions attempts to remove overlap between circles
 
-Experimental. Just trying overlap removal works
-
 # usage
 
 ``` js
@@ -17,7 +15,6 @@ var dist = distance(circles[0], circles[1]);
 assert(dist >= 13, 'it moved circles far enough');
 assert(lastMove < 1, 'it converged!');
 ```
-
 
 # license
 
