@@ -78,18 +78,27 @@ function addSize(node) {
 var createTree = require('yaqt');
 module.exports = removeOverlaps;
 
-function removeOverlaps(positions) {
+function removeOverlaps(positions, options) {
   var tree = createTree();
   // TODO: need to deal better with memory
   tree.init(positions.reduce(toFlatArray, []));
+  if (!options) options = {};
 
   var currentNode;
+  var totalMovement = 0;
+  var maxMove = typeof options.maxMove === 'number' ? options.maxMove : 1;
+  var maxIterations = typeof options.maxIterations === 'number' ? options.maxIterations : 10;
 
-  for (var index = 0; index < positions.length; index++) {
-    var posIdx = index * 2;
-    currentNode = positions[index];
-    tree.visit(visitTreeNode);
+  for (var i = 0; i < maxIterations ; ++i) {
+    totalMovement = 0;
+    for (var index = 0; index < positions.length; index++) {
+      currentNode = positions[index];
+      tree.visit(visitTreeNode);
+    }
+    if (totalMovement < maxMove) break;
   }
+
+  return totalMovement;
 
   function visitTreeNode(node) {
     var bounds = node.bounds;
@@ -134,11 +143,16 @@ function removeOverlaps(positions) {
     // Otherwise we should move each node in opposite direction, so that distance
     // is equal to totalRadius
     var offset = (distance - totalRadius)/distance * 0.5;
-    currentNode.x -= dx * offset;
-    currentNode.y -= dy * offset;
+    var mx = dx * offset;
+    var my = dy * offset;
 
-    otherNode.x += dx * offset;
-    otherNode.y += dy * offset;
+    currentNode.x -= mx;
+    currentNode.y -= my;
+
+    otherNode.x += mx;
+    otherNode.y += my;
+
+    totalMovement += Math.abs(mx) + Math.abs(my);
   }
 }
 
