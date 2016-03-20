@@ -1,6 +1,9 @@
 var createTree = require('yaqt');
 
-var circle = require('./lib/circleCheck.js');
+var removeMethods = {
+  circle: require('./lib/circleCheck.js'),
+  rectangle: require('./lib/rectCheck.js')
+}
 
 module.exports = removeOverlaps;
 
@@ -14,7 +17,24 @@ function removeOverlaps(positions, options) {
   var totalMovement = 0;
   var maxMove = typeof options.maxMove === 'number' ? options.maxMove : 1;
   var maxIterations = typeof options.maxIterations === 'number' ? options.maxIterations : 10;
-  var method = circle
+  var method;
+  if (typeof options.method === 'string') {
+    method = removeMethods[options.method]
+    if (!method) {
+      throw new Error(
+        'Unknown remove overlap method: ' + options.method +
+        '; Known methods are: ' + JSON.stringify(Object.keys(removeMethods)));
+    }
+  } else if (options.method) {
+      // custom user method
+      var validMethod = options.method.intersectQuad && options.method.removeOverlap;
+      if (!validMethod) throw new Error('Custom remove methods require both `intersectQuad()` and `removeOverlap()`');
+
+      method = options.method;
+  } else if (!options.method) {
+    // use circle by defult
+    method = removeMethods.circle;
+  }
 
   for (var i = 0; i < maxIterations ; ++i) {
     totalMovement = 0;
