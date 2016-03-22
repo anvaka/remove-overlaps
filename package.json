@@ -1,6 +1,6 @@
 {
   "name": "remove-overlaps",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Given set of N circles at predefined positions attempts to remove overlap between circles",
   "main": "index.js",
   "scripts": {
