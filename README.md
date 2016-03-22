@@ -1,4 +1,4 @@
-# remove-overlaps
+# remove-overlaps [![Build Status](https://travis-ci.org/anvaka/remove-overlaps.svg?branch=master)](https://travis-ci.org/anvaka/remove-overlaps)
 
 Given set of N circles at predefined positions attempts to remove overlap between circles.
 [Demo](https://anvaka.github.io/remove-overlaps/demo/).
