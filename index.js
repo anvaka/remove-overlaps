@@ -47,7 +47,7 @@ function removeOverlaps(positions, options) {
     var nodePoints = node.items;
     if (nodePoints) {
       // this is a leaf node, it can hold several items. We should check every
-      // Check every item to see if it overlaps with current node.
+      // item to see if it overlaps with current node.
       nodePoints.forEach(moveIfNeeded);
     } else {
       return method.intersectQuad(currentNode, bounds)

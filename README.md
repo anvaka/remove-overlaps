@@ -37,9 +37,9 @@ var rectangles = [
   {x: 0, y: 0, width: 10, height: 10},
   {x: 0, y: 0, width: 3, height: 4}
 ]
-var lastMove = removeOverlaps(rectangles)
+var lastMove = removeOverlaps(rectangles, {method: 'rectangle'})
 assert(lastMove < 1, 'it converged!')
-assert(!rectangeOverlaps(rectangles[0], rectangles[1]), 'Recangles do not overlap anymore')
+assert(!rectangleOverlaps(rectangles[0], rectangles[1]), 'Rectangles do not overlap anymore')
 ```
 
 # Performance considerations
