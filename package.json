@@ -4,7 +4,7 @@
   "description": "Given set of N circles at predefined positions attempts to remove overlap between circles",
   "main": "index.js",
   "scripts": {
-    "test": "tap test/*.js",
+    "test": "tap test/*.js --allow-incomplete-coverage",
     "start": "browserify demo/index.js > demo/bundle.js"
   },
   "keywords": [
@@ -24,7 +24,7 @@
     "ngraph.graph": "0.0.12",
     "ngraph.random": "0.0.1",
     "ngraph.svg": "0.0.15",
-    "tap": "^12.6.3"
+    "tap": "^21.5.0"
   },
   "dependencies": {
     "yaqt": "^1.1.0"
